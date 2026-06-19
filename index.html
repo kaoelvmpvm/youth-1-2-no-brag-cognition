@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#5f6dd9" />
-  <title>青春補給－不炫耀｜青春精靈 - 芙莉蓮</title>
+  <title>1-2 青春補給－不炫耀｜青春精靈 - 芙莉蓮</title>
   <style>
     :root{
       --bg:#f6f7ff; --paper:#ffffff; --ink:#25304a; --muted:#6b7390;
@@ -125,7 +126,6 @@
       .start-screen .lead{font-size:15px}
       .seal{width:100px;height:100px}
       .brand-text small{display:none}
-      .stats .pill:first-child{display:none}
     }
     @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
@@ -136,12 +136,11 @@
       <div class="brand">
         <div class="brand-badge"><img src="assets/frieren.webp" alt="芙莉蓮頭像"></div>
         <div class="brand-text">
-          <strong>青春補給－不炫耀</strong>
+          <strong>1-2 青春補給－不炫耀</strong>
           <small>青春精靈 - 芙莉蓮</small>
         </div>
       </div>
       <div class="stats">
-        <div class="pill">青春點數：<span id="score">0</span></div>
         <div class="pill">答對：<span id="correctCount">0</span>/<span id="totalQuizCount">9</span></div>
         <button class="sound-btn" id="soundBtn" aria-label="切換音效" title="切換音效">🔊</button>
       </div>
@@ -151,90 +150,111 @@
       </div>
     </header>
 
-    <section class="stage">
-      <div class="screen start-screen active" id="startScreen">
-        <div class="seal"><img src="assets/frieren.webp" alt="芙莉蓮頭像"></div>
-        <h1>青春補給<br>不炫耀</h1>
-        <div class="subtitle">青春精靈 - 芙莉蓮</div>
-        <p class="lead">
-          跟著芙莉蓮一起回想她的同伴們，完成互動挑戰與三大考驗，
-          學會不比較、不炫耀，並用尊重與準備面對親密關係。
-        </p>
-        <div class="feature-row">
-          <span class="feature">🎯 9 題互動挑戰</span>
-          <span class="feature">⭐ 累積青春點數</span>
+```
+<section class="stage">
+  <div class="screen start-screen active" id="startScreen">
+    <div class="seal"><img src="assets/frieren.webp" alt="芙莉蓮頭像"></div>
+    <h1>1-2 青春補給<br>不炫耀</h1>
+    <div class="subtitle">青春精靈 - 芙莉蓮</div>
+    <p class="lead">
+      跟著芙莉蓮一起回想她的同伴們，完成互動挑戰與三大考驗，
+      學會不比較、不炫耀，並用尊重與準備面對親密關係。
+    </p>
+    <div class="feature-row">
+      <span class="feature">🎯 9 題互動挑戰</span>
+      <span class="feature">🏆 完成取得青春密碼</span>
+    </div>
+    <button class="primary" id="startBtn">開始挑戰</button>
+  </div>
+
+  <div class="screen game-screen" id="gameScreen">
+    <div class="chapter">
+      <span id="chapterName">第一章</span>
+      <span class="chapter-tag hidden" id="pageTag"></span>
+    </div>
+
+    <div class="dialogue">
+      <div class="character-wrap">
+        <div class="character-frame">
+          <img id="sceneCharacter" class="scene-character" src="assets/scene_none.webp" alt="芙莉蓮回想同伴圖像">
         </div>
-        <button class="primary" id="startBtn">開始挑戰</button>
+        <div class="nameplate">青春精靈・芙莉蓮</div>
       </div>
 
-      <div class="screen game-screen" id="gameScreen">
-        <div class="chapter">
-          <span id="chapterName">第一章</span>
-          <span class="chapter-tag hidden" id="pageTag"></span>
-        </div>
+      <div class="bubble">
+        <div class="scene-title" id="sceneTitle">魔法學院開場</div>
+        <div class="speaker-line">芙莉蓮</div>
+        <div class="speech" id="speech"></div>
 
-        <div class="dialogue">
-          <div class="character-wrap">
-            <div class="character-frame">
-              <img id="sceneCharacter" class="scene-character" src="assets/scene_none.webp" alt="芙莉蓮回想同伴圖像">
-            </div>
-            <div class="nameplate">青春精靈・芙莉蓮</div>
-          </div>
-
-          <div class="bubble">
-            <div class="scene-title" id="sceneTitle">魔法學院開場</div>
-            <div class="speaker-line">芙莉蓮</div>
-            <div class="speech" id="speech"></div>
-
-            <div class="quiz-box" id="quizBox" hidden>
-              <div class="quiz-label">互動挑戰</div>
-              <div class="question" id="question"></div>
-              <div class="options" id="options"></div>
-              <div class="feedback" id="feedback"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="controls">
-          <div class="hint" id="hint">閱讀完成後，按「下一步」。</div>
-          <div class="control-buttons">
-            <button class="secondary" id="restartBtn">重新開始</button>
-            <button class="primary" id="nextBtn">下一步</button>
-          </div>
+        <div class="quiz-box" id="quizBox" hidden>
+          <div class="quiz-label">互動挑戰</div>
+          <div class="question" id="question"></div>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback"></div>
         </div>
       </div>
+    </div>
 
-      <div class="screen end-screen" id="endScreen">
-        <div class="trophy">🏆</div>
-        <h2>青春修練完成！</h2>
-        <p>你已完成所有互動挑戰，學會不比較、不炫耀，也更理解愛、界線與準備的重要。</p>
-        <div class="code-card">
-          <small>青春密碼</small>
-          <div class="code">2499</div>
-        </div>
-        <div class="summary">
-          <strong>你已完成的學習重點：</strong><br>
-          1. 真正的成熟不是炫耀性經驗，而是能理智判斷、獨立思考。<br>
-          2. 親密關係重點在尊重、信任與幸福感，不是把自己或他人當成比較工具。<br>
-          3. 面對同儕比較時，可以選擇登出競賽，尊重自己的節奏。<br>
-          4. 三大考驗的核心是：<strong>性不是愛的證明、性是愛的選擇、性需要準備。</strong>
-        </div>
-        <div class="end-actions">
-          <button class="secondary" id="copyBtn">複製青春密碼</button>
-          <button class="primary" id="playAgainBtn">再玩一次</button>
-        </div>
+    <div class="controls">
+      <div class="hint" id="hint">閱讀完成後，按「下一幕」。</div>
+      <div class="control-buttons">
+        <button class="secondary" id="restartBtn">重新開始</button>
+        <button class="primary" id="nextBtn">下一幕</button>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <div class="screen end-screen" id="endScreen">
+    <div class="trophy">🏆</div>
+    <h2>青春修練完成！</h2>
+    <p>你已完成所有互動挑戰，學會不比較、不炫耀，也更理解愛、界線與準備的重要。</p>
+    <div class="code-card">
+      <small>青春密碼</small>
+      <div class="code">2499</div>
+    </div>
+    <div class="summary">
+      <strong>你已完成的學習重點：</strong><br>
+      1. 真正的成熟不是炫耀性經驗，而是能理智判斷、獨立思考。<br>
+      2. 親密關係重點在尊重、信任與幸福感，不是把自己或他人當成比較工具。<br>
+      3. 面對同儕比較時，可以選擇登出競賽，尊重自己的節奏。<br>
+      4. 三大考驗的核心是：<strong>性不是愛的證明、性是愛的選擇、性需要準備。</strong>
+    </div>
+    <div class="end-actions">
+      <button class="secondary" id="copyBtn">複製青春密碼</button>
+      <button class="primary" id="playAgainBtn">再玩一次</button>
+    </div>
+  </div>
+</section>
+```
+
   </main>
 
   <div class="toast" id="toast">已複製青春密碼 2499</div>
 
   <script>
-    const scenes = [{"title": "魔法學院開學了", "chapter": "第一章｜真正的成熟", "text": "「青春補給－不炫耀」魔法學院開學了！\n我化身為青春精靈，要帶大家一起修煉「愛與尊重」的功力喔。", "thought": null, "thoughtLabel": ""}, {"title": "互動挑戰 1", "chapter": "第一章｜真正的成熟", "text": "活了上千年的歲月中，我看過許多年輕冒險者，就像修塔爾克那樣，努力想證明自己已經長大、成熟了。\nQ1：你覺得怎樣才是「真正的成熟」呢？", "thought": "stark", "thoughtLabel": "芙莉蓮想起：修塔爾克", "quiz": {"q": "你覺得怎樣才是「真正的成熟」呢？", "options": ["炫耀自己的性經驗", "堅定態度，理智作決定", "羨慕別人豐富的性經驗"], "answer": 1, "good": "答對了！真正的成熟，不是拿經驗來比較，而是能理智判斷、穩定思考，為自己做出負責任的決定。", "retry": "再想一想：成熟更接近判斷力、責任感與獨立思考。"}}, {"title": "互動挑戰 2", "chapter": "第一章｜真正的成熟", "text": "我的好朋友海塔他就認為，將「性經驗」當戰功炫耀，並不能讓你變成「理想的大人」的。\nQ2：如果常在朋友圈「吹噓性經驗」，會讓人獲得什麼呢？", "thought": "heiter", "thoughtLabel": "芙莉蓮想起：海塔", "quiz": {"q": "如果常在朋友圈「吹噓性經驗」，會讓人獲得什麼呢？", "options": ["幼稚且不真誠", "有魅力、受歡迎", "在同儕中有較高地位"], "answer": 0, "good": "答對了！刻意吹噓反而容易讓人覺得幼稚、不真誠，也可能慢慢失去別人的信任。", "retry": "想一想：吹噓真的會讓人更成熟，還是更像在逞強呢？"}}, {"title": "理想的大人", "chapter": "第一章｜真正的成熟", "text": "因為，刻意炫耀的行為反而顯得幼稚，久而久之，還可能被當成愛吹牛的討厭鬼喔。\n所以，一個真正「理想的大人」，必須具備成熟的心智、健康的價值觀，能獨立思考與明智抉擇。", "thought": "heiter", "thoughtLabel": "芙莉蓮想起：海塔"}, {"title": "互動挑戰 3", "chapter": "第二章｜不要把親密關係當打怪", "text": "有些年輕人把談戀愛想像成冒險打怪一樣，以為親密關係解鎖越多身體接觸，等級就越高、越有魅力。\nQ3：你對青少年「提前發生、越多」的性經驗，有什麼看法？", "thought": null, "thoughtLabel": "", "quiz": {"q": "你對青少年「提前發生、越多」的性經驗，有什麼看法？", "options": ["越多性經驗，讓感情更親密", "刷高性經驗值，贏得更多讚", "趕進度的「性」是不健康的"], "answer": 2, "good": "答對了！把性經驗當進度條，反而容易忽略真正重要的尊重、感情與準備。", "retry": "再想一想：越早、越多，真的就代表越健康嗎？"}}, {"title": "幸福感不是靠比較", "chapter": "第二章｜不要把親密關係當打怪", "text": "從我的學生費倫身上，我倒是學習到，快樂並不是靠「性經驗」的累積，而是因為「重要的人感到幸福」啊！\n健康的愛，不是把彼此當成比較工具，而是讓彼此都被好好對待。", "thought": "fern", "thoughtLabel": "芙莉蓮想起：費倫"}, {"title": "互動挑戰 4", "chapter": "第二章｜不要把親密關係當打怪", "text": "但有些人還是很擔心：「當大家都在放閃、升級性經驗，我都沒有，會不會變成圈外人啊？」\nQ4：當身邊的人都在比較性經驗，而你沒有時，哪一種想法最健康？", "thought": "fern", "thoughtLabel": "芙莉蓮想起：費倫", "quiz": {"q": "當身邊的人都在比較性經驗，而你沒有時，哪一種想法最健康？", "options": ["OMG！完蛋了，我好遜", "GO！加快進度加入行列", "STOP！從比較競賽中登出"], "answer": 2, "good": "答對了！最健康的做法不是追進度，而是退出比較，把焦點放回自己的價值與節奏。", "retry": "想一想：盲目跟進比較，真的會讓你更自在嗎？"}}, {"title": "其實你並不孤單", "chapter": "第二章｜不要把親密關係當打怪", "text": "其實，絕大多數的青少年是沒有親密性行為經驗的。\n所以，別再因為一時跟不上別人的戀愛話題，就覺得自己會被排擠、邊緣化了。", "thought": null, "thoughtLabel": ""}, {"title": "互動挑戰 5", "chapter": "第三章｜炫耀會傷人", "text": "我在人世間看過，有人深陷在「炫耀自己的性經驗」的漩渦中，最後對自己與對象都會造成傷害。\nQ5：把性經驗當成自我炫耀的工具，會對親密關係帶來什麼後果？", "thought": null, "thoughtLabel": "", "quiz": {"q": "把性經驗當成自我炫耀的工具，會對親密關係帶來什麼後果？", "options": ["暴露隱私，破壞信任與尊重", "公開親密，博取聲量與祝福", "相愛的證明，感情更親密穩定"], "answer": 0, "good": "答對了！拿親密經驗來炫耀，常會傷害隱私、信任與彼此尊重。", "retry": "回想看看：真正好的關係，會把親密當成公開展覽嗎？"}}, {"title": "信任不是拿來展示", "chapter": "第三章｜炫耀會傷人", "text": "因為健康的親密關係應該是彼此尊重、共同呵護，而不是拿來公開展覽、換取同儕的掌聲。\n若還暴露私密影像，更可能傷害對方，甚至觸犯兒少性剝削相關法律。", "thought": null, "thoughtLabel": ""}, {"title": "互動挑戰 6｜考驗一", "chapter": "第四章｜面對性與愛的三大考驗", "text": "我的另一個好友艾冉曾說過：「努力過的人都是戰士。」\n現在，先一起面對第一個考驗吧！\nQ6：【考驗一】你同意「性可以證明真愛」嗎？", "thought": "eisen", "thoughtLabel": "芙莉蓮想起：艾冉", "quiz": {"q": "【考驗一】你同意「性可以證明真愛」嗎？", "options": ["同意，用性可以驗證是否相愛", "不同意，有愛的性才是有價值的", "不一定，只有取悅對方的性才是愛"], "answer": 1, "good": "答對了！真愛來自關懷、理解與尊重，不是靠性去驗證，更不是拿來滿足比較與炫耀。", "retry": "想一想：完整的愛，能不能只靠一種行為就被證明？"}}, {"title": "考驗一過關", "chapter": "第四章｜面對性與愛的三大考驗", "text": "恭喜你取得第一關「性，不是愛的證明題」定心術。\n因為性經驗，永遠無法驗證完整的愛。", "thought": "eisen", "thoughtLabel": "芙莉蓮想起：艾冉"}, {"title": "互動挑戰 7｜考驗二", "chapter": "第四章｜面對性與愛的三大考驗", "text": "我曾經跟我的學生費倫說過：「不把話說出口，對方是不會明白妳心情的。」\n所以，當面對比較與壓力時，你敢不敢勇敢說出——「現在還不是時候」？\nQ7：【考驗二】當你說出「性，現在還不是時候」，這代表什麼？", "thought": "fern", "thoughtLabel": "芙莉蓮想起：費倫", "quiz": {"q": "【考驗二】當你說出「性，現在還不是時候」，這代表什麼？", "options": ["自己很遜、能力不行", "膽小，跟不上潮流", "尊重自己、負責表現"], "answer": 2, "good": "答對了！願意清楚表達自己的界線，是成熟、負責，而且值得被尊重的決定。", "retry": "再想想：能明確說出自己的意願，通常代表什麼呢？"}}, {"title": "考驗二過關", "chapter": "第四章｜面對性與愛的三大考驗", "text": "太棒了！你取得第二關「性，是愛的選擇題」定心術。\n你的意願應該被看重，「暫停，現在還不是時候」永遠是一個成熟而明智的決定。", "thought": "fern", "thoughtLabel": "芙莉蓮想起：費倫"}, {"title": "互動挑戰 8｜考驗三", "chapter": "第四章｜面對性與愛的三大考驗", "text": "當你因為「他們都有，我卻沒有」而焦慮時，我的好友艾冉會提醒你：感到恐懼不是一件壞事，把它轉成穩定自己的力量吧。\nQ8：【考驗三】因為「他們都有，我卻沒有」而焦慮時，要如何轉換心情？", "thought": "eisen", "thoughtLabel": "芙莉蓮想起：艾冉", "quiz": {"q": "【考驗三】因為「他們都有，我卻沒有」而焦慮時，要如何轉換心情？", "options": ["想辦法衝一波趕上", "先不要，我沒準備好", "請教高手，增加性經驗"], "answer": 1, "good": "答對了！真正重要的不是跟上別人，而是誠實確認：我準備好了嗎？", "retry": "想一想：最健康的焦點，是追進度，還是確認自己是否準備好？"}}, {"title": "考驗三過關", "chapter": "第四章｜面對性與愛的三大考驗", "text": "做得很好！你修練了第三關「性，需要用愛來準備」定心術。\n這份準備包括身心成熟、情感穩定與承諾，以及足夠的性健康知識。", "thought": "eisen", "thoughtLabel": "芙莉蓮想起：艾冉"}, {"title": "互動挑戰 9｜最後一題", "chapter": "第五章｜你真正想要的關係", "text": "我的好友欣梅爾常說：「我在跟你說現在的事。」\n所以，比起別人的KPI，更重要的是你自己真正想要的親密關係。\nQ9：以下哪一項是你「最不想要」的親密關係呢？", "thought": "himmel", "thoughtLabel": "芙莉蓮想起：欣梅爾", "quiz": {"q": "以下哪一項是你「最不想要」的親密關係呢？", "options": ["重視關係品質", "經營自己情感時序", "花心思增加性經驗"], "answer": 2, "good": "答對了！真正值得經營的，不是比較誰經驗多，而是關係品質與自己的節奏。", "retry": "再確認一次：你最不想把感情變成哪一種樣子？"}}, {"title": "畢業禮物", "chapter": "第五章｜你真正想要的關係", "text": "真愛不是競技場，守住本心，不需花力氣去炫耀與比較談戀愛的進度。\n從從容容地感受愛，打造屬於自己的幸福。\n畢業禮物【青春密碼 2499】——愛是久久。", "thought": "himmel", "thoughtLabel": "芙莉蓮想起：欣梅爾"}];
-        const totalQuiz = scenes.filter(s => !!s.quiz).length;
+    const scenes = [
+      {"title":"魔法學院開學了","chapter":"第一章｜真正的成熟","text":"「1-2 青春補給－不炫耀」魔法學院開學了！\n我化身為青春精靈，要帶大家一起修煉「愛與尊重」的功力喔。","thought":null,"thoughtLabel":""},
+      {"title":"互動挑戰 1","chapter":"第一章｜真正的成熟","text":"活了上千年的歲月中，我看過許多年輕冒險者，就像修塔爾克那樣，努力想證明自己已經長大、成熟了。\nQ1：你覺得怎樣才是「真正的成熟」呢？","thought":"stark","thoughtLabel":"芙莉蓮想起：修塔爾克","quiz":{"q":"你覺得怎樣才是「真正的成熟」呢？","options":["炫耀自己的性經驗","堅定態度，理智作決定","羨慕別人豐富的性經驗"],"answer":1,"good":"答對了！真正的成熟，不是拿經驗來比較，而是能理智判斷、穩定思考，為自己做出負責任的決定。","retry":"再想一想：成熟更接近判斷力、責任感與獨立思考。"}},
+      {"title":"互動挑戰 2","chapter":"第一章｜真正的成熟","text":"我的好朋友海塔他就認為，將「性經驗」當戰功炫耀，並不能讓你變成「理想的大人」的。\nQ2：如果常在朋友圈「吹噓性經驗」，會讓人獲得什麼呢？","thought":"heiter","thoughtLabel":"芙莉蓮想起：海塔","quiz":{"q":"如果常在朋友圈「吹噓性經驗」，會讓人獲得什麼呢？","options":["幼稚且不真誠","有魅力、受歡迎","在同儕中有較高地位"],"answer":0,"good":"答對了！刻意吹噓反而容易讓人覺得幼稚、不真誠，也可能慢慢失去別人的信任。","retry":"想一想：吹噓真的會讓人更成熟，還是更像在逞強呢？"}},
+      {"title":"理想的大人","chapter":"第一章｜真正的成熟","text":"因為，刻意炫耀的行為反而顯得幼稚，久而久之，還可能被當成愛吹牛的討厭鬼喔。\n所以，一個真正「理想的大人」，必須具備成熟的心智、健康的價值觀，能獨立思考與明智抉擇。","thought":"heiter","thoughtLabel":"芙莉蓮想起：海塔"},
+      {"title":"互動挑戰 3","chapter":"第二章｜不要把親密關係當打怪","text":"有些年輕人把談戀愛想像成冒險打怪一樣，以為親密關係解鎖越多身體接觸，等級就越高、越有魅力。\nQ3：你對青少年「提前發生、越多」的性經驗，有什麼看法？","thought":null,"thoughtLabel":"","quiz":{"q":"你對青少年「提前發生、越多」的性經驗，有什麼看法？","options":["越多性經驗，讓感情更親密","刷高性經驗值，贏得更多讚","趕進度的「性」是不健康的"],"answer":2,"good":"答對了！把性經驗當進度條，反而容易忽略真正重要的尊重、感情與準備。","retry":"再想一想：越早、越多，真的就代表越健康嗎？"}},
+      {"title":"幸福感不是靠比較","chapter":"第二章｜不要把親密關係當打怪","text":"從我的學生費倫身上，我倒是學習到，快樂並不是靠「性經驗」的累積，而是因為「重要的人感到幸福」啊！\n健康的愛，不是把彼此當成比較工具，而是讓彼此都被好好對待。","thought":"fern","thoughtLabel":"芙莉蓮想起：費倫"},
+      {"title":"互動挑戰 4","chapter":"第二章｜不要把親密關係當打怪","text":"但有些人還是很擔心：「當大家都在放閃、升級性經驗，我都沒有，會不會變成圈外人啊？」\nQ4：當身邊的人都在比較性經驗，而你沒有時，哪一種想法最健康？","thought":"fern","thoughtLabel":"芙莉蓮想起：費倫","quiz":{"q":"當身邊的人都在比較性經驗，而你沒有時，哪一種想法最健康？","options":["OMG！完蛋了，我好遜","GO！加快進度加入行列","STOP！從比較競賽中登出"],"answer":2,"good":"答對了！最健康的做法不是追進度，而是退出比較，把焦點放回自己的價值與節奏。","retry":"想一想：盲目跟進比較，真的會讓你更自在嗎？"}},
+      {"title":"其實你並不孤單","chapter":"第二章｜不要把親密關係當打怪","text":"其實，絕大多數的青少年是沒有親密性行為經驗的。\n所以，別再因為一時跟不上別人的戀愛話題，就覺得自己會被排擠、邊緣化了。","thought":null,"thoughtLabel":""},
+      {"title":"互動挑戰 5","chapter":"第三章｜炫耀會傷人","text":"我在人世間看過，有人深陷在「炫耀自己的性經驗」的漩渦中，最後對自己與對象都會造成傷害。\nQ5：把性經驗當成自我炫耀的工具，會對親密關係帶來什麼後果？","thought":null,"thoughtLabel":"","quiz":{"q":"把性經驗當成自我炫耀的工具，會對親密關係帶來什麼後果？","options":["暴露隱私，破壞信任與尊重","公開親密，博取聲量與祝福","相愛的證明，感情更親密穩定"],"answer":0,"good":"答對了！拿親密經驗來炫耀，常會傷害隱私、信任與彼此尊重。","retry":"回想看看：真正好的關係，會把親密當成公開展覽嗎？"}},
+      {"title":"信任不是拿來展示","chapter":"第三章｜炫耀會傷人","text":"因為健康的親密關係應該是彼此尊重、共同呵護，而不是拿來公開展覽、換取同儕的掌聲。\n若還暴露私密影像，更可能傷害對方，甚至觸犯兒少性剝削相關法律。","thought":null,"thoughtLabel":""},
+      {"title":"互動挑戰 6｜考驗一","chapter":"第四章｜面對性與愛的三大考驗","text":"我的另一個好友艾冉曾說過：「努力過的人都是戰士。」\n現在，先一起面對第一個考驗吧！\nQ6：【考驗一】你同意「性可以證明真愛」嗎？","thought":"eisen","thoughtLabel":"芙莉蓮想起：艾冉","quiz":{"q":"【考驗一】你同意「性可以證明真愛」嗎？","options":["同意，用性可以驗證是否相愛","不同意，有愛的性才是有價值的","不一定，只有取悅對方的性才是愛"],"answer":1,"good":"答對了！真愛來自關懷、理解與尊重，不是靠性去驗證，更不是拿來滿足比較與炫耀。","retry":"想一想：完整的愛，能不能只靠一種行為就被證明？"}},
+      {"title":"考驗一過關","chapter":"第四章｜面對性與愛的三大考驗","text":"恭喜你取得第一關「性，不是愛的證明題」定心術。\n因為性經驗，永遠無法驗證完整的愛。","thought":"eisen","thoughtLabel":"芙莉蓮想起：艾冉"},
+      {"title":"互動挑戰 7｜考驗二","chapter":"第四章｜面對性與愛的三大考驗","text":"我曾經跟我的學生費倫說過：「不把話說出口，對方是不會明白妳心情的。」\n所以，當面對比較與壓力時，你敢不敢勇敢說出——「現在還不是時候」？\nQ7：【考驗二】當你說出「性，現在還不是時候」，這代表什麼？","thought":"fern","thoughtLabel":"芙莉蓮想起：費倫","quiz":{"q":"【考驗二】當你說出「性，現在還不是時候」，這代表什麼？","options":["自己很遜、能力不行","膽小，跟不上潮流","尊重自己、負責表現"],"answer":2,"good":"答對了！願意清楚表達自己的界線，是成熟、負責，而且值得被尊重的決定。","retry":"再想想：能明確說出自己的意願，通常代表什麼呢？"}},
+      {"title":"考驗二過關","chapter":"第四章｜面對性與愛的三大考驗","text":"太棒了！你取得第二關「性，是愛的選擇題」定心術。\n你的意願應該被看重，「暫停，現在還不是時候」永遠是一個成熟而明智的決定。","thought":"fern","thoughtLabel":"芙莉蓮想起：費倫"},
+      {"title":"互動挑戰 8｜考驗三","chapter":"第四章｜面對性與愛的三大考驗","text":"當你因為「他們都有，我卻沒有」而焦慮時，我的好友艾冉會提醒你：感到恐懼不是一件壞事，把它轉成穩定自己的力量吧。\nQ8：【考驗三】因為「他們都有，我卻沒有」而焦慮時，要如何轉換心情？","thought":"eisen","thoughtLabel":"芙莉蓮想起：艾冉","quiz":{"q":"【考驗三】因為「他們都有，我卻沒有」而焦慮時，要如何轉換心情？","options":["想辦法衝一波趕上","先不要，我沒準備好","請教高手，增加性經驗"],"answer":1,"good":"答對了！真正重要的不是跟上別人，而是誠實確認：我準備好了嗎？","retry":"想一想：最健康的焦點，是追進度，還是確認自己是否準備好？"}},
+      {"title":"考驗三過關","chapter":"第四章｜面對性與愛的三大考驗","text":"做得很好！你修練了第三關「性，需要用愛來準備」定心術。\n這份準備包括身心成熟、情感穩定與承諾，以及足夠的性健康知識。","thought":"eisen","thoughtLabel":"芙莉蓮想起：艾冉"},
+      {"title":"互動挑戰 9｜最後一題","chapter":"第五章｜你真正想要的關係","text":"我的好友欣梅爾常說：「我在跟你說現在的事。」\n所以，比起別人的KPI，更重要的是你自己真正想要的親密關係。\nQ9：以下哪一項是你「最不想要」的親密關係呢？","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾","quiz":{"q":"以下哪一項是你「最不想要」的親密關係呢？","options":["重視關係品質，不必趕進度","經營自己情感時序，不需跟人比較","花心思增加性經驗","越早越多越好"],"answer":3,"good":"答對了！真正值得經營的，不是比較誰經驗多，而是關係品質與自己的節奏。","retry":"再確認一次：你最不想把感情變成哪一種樣子？"}},
+      {"title":"畢業禮物","chapter":"第五章｜你真正想要的關係","text":"真愛不是競技場，守住本心，不需花力氣去炫耀與比較談戀愛的進度。\n從從容容地感受愛，打造屬於自己的幸福。\n畢業禮物【青春密碼 2499】——愛是久久。","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾"}
+    ];
+    const totalQuiz = scenes.filter(s => !!s.quiz).length;
 
     let index = 0;
-    let score = 0;
     let correctCount = 0;
     let answered = new Set();
     let soundOn = true;
@@ -256,7 +276,6 @@
     const hint = $("hint");
     const progressBar = $("progressBar");
     const progressText = $("progressText");
-    const scoreEl = $("score");
     const correctCountEl = $("correctCount");
     $("totalQuizCount").textContent = totalQuiz;
 
@@ -308,7 +327,7 @@
       if(s.quiz){
         quizBox.hidden = false;
         question.textContent = s.quiz.q;
-        const letters = ["A","B","C"];
+        const letters = ["A","B","C","D"];
         s.quiz.options.forEach((opt,i)=>{
           const btn = document.createElement("button");
           btn.className = "option";
@@ -317,7 +336,7 @@
           options.appendChild(btn);
         });
         nextBtn.disabled = !answered.has(index);
-        hint.textContent = answered.has(index) ? "已完成本題，可以前往下一步。" : "答對後才能繼續前進。";
+        hint.textContent = answered.has(index) ? "已完成本題，可以前往下一幕。" : "答對後才能繼續前進。";
         if(answered.has(index)){
           [...options.children].forEach((btn,i)=>{
             btn.disabled = true;
@@ -329,10 +348,10 @@
       }else{
         quizBox.hidden = true;
         nextBtn.disabled = false;
-        hint.textContent = index === scenes.length - 1 ? "按下完成，取得青春密碼。" : "閱讀完成後，按「下一步」。";
+        hint.textContent = index === scenes.length - 1 ? "按下完成，取得青春密碼。" : "閱讀完成後，按「下一幕」。";
       }
 
-      nextBtn.textContent = index === scenes.length - 1 ? "完成挑戰" : "下一步";
+      nextBtn.textContent = index === scenes.length - 1 ? "完成挑戰" : "下一幕";
       updateProgress();
       saveProgress();
       window.scrollTo({top:0,behavior:"smooth"});
@@ -344,14 +363,12 @@
         btn.classList.add("correct");
         [...options.children].forEach(b => b.disabled = true);
         answered.add(index);
-        score += 10;
         correctCount += 1;
-        scoreEl.textContent = score;
         correctCountEl.textContent = correctCount;
         feedback.textContent = quiz.good;
         feedback.className = "feedback good show";
         nextBtn.disabled = false;
-        hint.textContent = "答對了！可以前往下一步。";
+        hint.textContent = "答對了！可以前往下一幕。";
         beep("ok");
         saveProgress();
       }else{
@@ -372,13 +389,13 @@
 
     function saveProgress(){
       localStorage.setItem("buxuanyaoGameV2", JSON.stringify({
-        index, score, correctCount, answered:[...answered]
+        index, correctCount, answered:[...answered]
       }));
     }
 
     function startGame(reset=false){
       if(reset){
-        index = 0; score = 0; correctCount = 0; answered = new Set();
+        index = 0; correctCount = 0; answered = new Set();
         localStorage.removeItem("buxuanyaoGameV2");
       }else{
         const saved = localStorage.getItem("buxuanyaoGameV2");
@@ -386,13 +403,11 @@
           try{
             const data = JSON.parse(saved);
             index = Math.min(data.index || 0, scenes.length - 1);
-            score = data.score || 0;
             correctCount = data.correctCount || 0;
             answered = new Set(data.answered || []);
           }catch(e){}
         }
       }
-      scoreEl.textContent = score;
       correctCountEl.textContent = correctCount;
       startScreen.classList.remove("active");
       endScreen.classList.remove("active");
@@ -461,5 +476,6 @@
       }
     }catch(e){}
   </script>
+
 </body>
 </html>
