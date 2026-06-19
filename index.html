@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
@@ -150,83 +149,80 @@
       </div>
     </header>
 
-```
-<section class="stage">
-  <div class="screen start-screen active" id="startScreen">
-    <div class="seal"><img src="assets/frieren.webp" alt="芙莉蓮頭像"></div>
-    <h1>1-2 青春補給<br>不炫耀</h1>
-    <div class="subtitle">青春精靈 - 芙莉蓮</div>
-    <p class="lead">
-      跟著芙莉蓮一起回想她的同伴們，完成互動挑戰與三大考驗，
-      學會不比較、不炫耀，並用尊重與準備面對親密關係。
-    </p>
-    <div class="feature-row">
-      <span class="feature">🎯 9 題互動挑戰</span>
-      <span class="feature">🏆 完成取得青春密碼</span>
-    </div>
-    <button class="primary" id="startBtn">開始挑戰</button>
-  </div>
-
-  <div class="screen game-screen" id="gameScreen">
-    <div class="chapter">
-      <span id="chapterName">第一章</span>
-      <span class="chapter-tag hidden" id="pageTag"></span>
-    </div>
-
-    <div class="dialogue">
-      <div class="character-wrap">
-        <div class="character-frame">
-          <img id="sceneCharacter" class="scene-character" src="assets/scene_none.webp" alt="芙莉蓮回想同伴圖像">
+    <section class="stage">
+      <div class="screen start-screen active" id="startScreen">
+        <div class="seal"><img src="assets/frieren.webp" alt="芙莉蓮頭像"></div>
+        <h1>1-2 青春補給<br>不炫耀</h1>
+        <div class="subtitle">青春精靈 - 芙莉蓮</div>
+        <p class="lead">
+          跟著芙莉蓮一起回想她的同伴們，完成互動挑戰與三大考驗，
+          學會不比較、不炫耀，並用尊重與準備面對親密關係。
+        </p>
+        <div class="feature-row">
+          <span class="feature">🎯 9 題互動挑戰</span>
+          <span class="feature">🏆 完成取得青春密碼</span>
         </div>
-        <div class="nameplate">青春精靈・芙莉蓮</div>
+        <button class="primary" id="startBtn">開始挑戰</button>
       </div>
 
-      <div class="bubble">
-        <div class="scene-title" id="sceneTitle">魔法學院開場</div>
-        <div class="speaker-line">芙莉蓮</div>
-        <div class="speech" id="speech"></div>
+      <div class="screen game-screen" id="gameScreen">
+        <div class="chapter">
+          <span id="chapterName">第一章</span>
+          <span class="chapter-tag hidden" id="pageTag"></span>
+        </div>
 
-        <div class="quiz-box" id="quizBox" hidden>
-          <div class="quiz-label">互動挑戰</div>
-          <div class="question" id="question"></div>
-          <div class="options" id="options"></div>
-          <div class="feedback" id="feedback"></div>
+        <div class="dialogue">
+          <div class="character-wrap">
+            <div class="character-frame">
+              <img id="sceneCharacter" class="scene-character" src="assets/scene_none.webp" alt="芙莉蓮回想同伴圖像">
+            </div>
+            <div class="nameplate">青春精靈・芙莉蓮</div>
+          </div>
+
+          <div class="bubble">
+            <div class="scene-title" id="sceneTitle">魔法學院開場</div>
+            <div class="speaker-line">芙莉蓮</div>
+            <div class="speech" id="speech"></div>
+
+            <div class="quiz-box" id="quizBox" hidden>
+              <div class="quiz-label">互動挑戰</div>
+              <div class="question" id="question"></div>
+              <div class="options" id="options"></div>
+              <div class="feedback" id="feedback"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="hint" id="hint">閱讀完成後，按「下一幕」。</div>
+          <div class="control-buttons">
+            <button class="secondary" id="restartBtn">重新開始</button>
+            <button class="primary" id="nextBtn">下一幕</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="controls">
-      <div class="hint" id="hint">閱讀完成後，按「下一幕」。</div>
-      <div class="control-buttons">
-        <button class="secondary" id="restartBtn">重新開始</button>
-        <button class="primary" id="nextBtn">下一幕</button>
+      <div class="screen end-screen" id="endScreen">
+        <div class="trophy">🏆</div>
+        <h2>青春修練完成！</h2>
+        <p>你已完成所有互動挑戰，學會不比較、不炫耀，也更理解愛、界線與準備的重要。</p>
+        <div class="code-card">
+          <small>青春密碼</small>
+          <div class="code">2499</div>
+        </div>
+        <div class="summary">
+          <strong>你已完成的學習重點：</strong><br>
+          1. 真正的成熟不是炫耀性經驗，而是能理智判斷、獨立思考。<br>
+          2. 親密關係重點在尊重、信任與幸福感，不是把自己或他人當成比較工具。<br>
+          3. 面對同儕比較時，可以選擇登出競賽，尊重自己的節奏。<br>
+          4. 三大考驗的核心是：<strong>性不是愛的證明、性是愛的選擇、性需要準備。</strong>
+        </div>
+        <div class="end-actions">
+          <button class="secondary" id="copyBtn">複製青春密碼</button>
+          <button class="primary" id="playAgainBtn">再玩一次</button>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="screen end-screen" id="endScreen">
-    <div class="trophy">🏆</div>
-    <h2>青春修練完成！</h2>
-    <p>你已完成所有互動挑戰，學會不比較、不炫耀，也更理解愛、界線與準備的重要。</p>
-    <div class="code-card">
-      <small>青春密碼</small>
-      <div class="code">2499</div>
-    </div>
-    <div class="summary">
-      <strong>你已完成的學習重點：</strong><br>
-      1. 真正的成熟不是炫耀性經驗，而是能理智判斷、獨立思考。<br>
-      2. 親密關係重點在尊重、信任與幸福感，不是把自己或他人當成比較工具。<br>
-      3. 面對同儕比較時，可以選擇登出競賽，尊重自己的節奏。<br>
-      4. 三大考驗的核心是：<strong>性不是愛的證明、性是愛的選擇、性需要準備。</strong>
-    </div>
-    <div class="end-actions">
-      <button class="secondary" id="copyBtn">複製青春密碼</button>
-      <button class="primary" id="playAgainBtn">再玩一次</button>
-    </div>
-  </div>
-</section>
-```
-
+    </section>
   </main>
 
   <div class="toast" id="toast">已複製青春密碼 2499</div>
@@ -249,7 +245,24 @@
       {"title":"考驗二過關","chapter":"第四章｜面對性與愛的三大考驗","text":"太棒了！你取得第二關「性，是愛的選擇題」定心術。\n你的意願應該被看重，「暫停，現在還不是時候」永遠是一個成熟而明智的決定。","thought":"fern","thoughtLabel":"芙莉蓮想起：費倫"},
       {"title":"互動挑戰 8｜考驗三","chapter":"第四章｜面對性與愛的三大考驗","text":"當你因為「他們都有，我卻沒有」而焦慮時，我的好友艾冉會提醒你：感到恐懼不是一件壞事，把它轉成穩定自己的力量吧。\nQ8：【考驗三】因為「他們都有，我卻沒有」而焦慮時，要如何轉換心情？","thought":"eisen","thoughtLabel":"芙莉蓮想起：艾冉","quiz":{"q":"【考驗三】因為「他們都有，我卻沒有」而焦慮時，要如何轉換心情？","options":["想辦法衝一波趕上","先不要，我沒準備好","請教高手，增加性經驗"],"answer":1,"good":"答對了！真正重要的不是跟上別人，而是誠實確認：我準備好了嗎？","retry":"想一想：最健康的焦點，是追進度，還是確認自己是否準備好？"}},
       {"title":"考驗三過關","chapter":"第四章｜面對性與愛的三大考驗","text":"做得很好！你修練了第三關「性，需要用愛來準備」定心術。\n這份準備包括身心成熟、情感穩定與承諾，以及足夠的性健康知識。","thought":"eisen","thoughtLabel":"芙莉蓮想起：艾冉"},
-      {"title":"互動挑戰 9｜最後一題","chapter":"第五章｜你真正想要的關係","text":"我的好友欣梅爾常說：「我在跟你說現在的事。」\n所以，比起別人的KPI，更重要的是你自己真正想要的親密關係。\nQ9：以下哪一項是你「最不想要」的親密關係呢？","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾","quiz":{"q":"以下哪一項是你「最不想要」的親密關係呢？","options":["重視關係品質，不必趕進度","經營自己情感時序，不需跟人比較","花心思增加性經驗","越早越多越好"],"answer":3,"good":"答對了！真正值得經營的，不是比較誰經驗多，而是關係品質與自己的節奏。","retry":"再確認一次：你最不想把感情變成哪一種樣子？"}},
+      {
+        "title":"互動挑戰 9｜最後一題",
+        "chapter":"第五章｜你真正想要的關係",
+        "text":"我的好友欣梅爾常說：「我在跟你說現在的事。」\n所以，比起別人的KPI，更重要的是你自己真正想要的親密關係。\nQ9：以下哪一項是你「最不想要」的親密關係呢？",
+        "thought":"himmel",
+        "thoughtLabel":"芙莉蓮想起：欣梅爾",
+        "quiz":{
+          "q":"以下哪一項是你「最不想要」的親密關係呢？",
+          "options":[
+            "重視關係品質，不必趕進度",
+            "經營自己情感時序，不需跟人比較",
+            "花心思增加性經驗，越早越多越好"
+          ],
+          "answer":2,
+          "good":"答對了！真正值得經營的，不是比較誰經驗多，而是關係品質與自己的節奏。",
+          "retry":"再確認一次：你最不想把感情變成哪一種樣子？"
+        }
+      },
       {"title":"畢業禮物","chapter":"第五章｜你真正想要的關係","text":"真愛不是競技場，守住本心，不需花力氣去炫耀與比較談戀愛的進度。\n從從容容地感受愛，打造屬於自己的幸福。\n畢業禮物【青春密碼 2499】——愛是久久。","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾"}
     ];
     const totalQuiz = scenes.filter(s => !!s.quiz).length;
@@ -327,7 +340,7 @@
       if(s.quiz){
         quizBox.hidden = false;
         question.textContent = s.quiz.q;
-        const letters = ["A","B","C","D"];
+        const letters = ["A","B","C"];
         s.quiz.options.forEach((opt,i)=>{
           const btn = document.createElement("button");
           btn.className = "option";
@@ -476,6 +489,5 @@
       }
     }catch(e){}
   </script>
-
 </body>
 </html>
