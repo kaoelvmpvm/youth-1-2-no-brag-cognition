@@ -64,6 +64,7 @@
     .primary:disabled{background:#b8bcd4;box-shadow:0 6px 0 #969bb4;cursor:not-allowed}
     .secondary{background:#eef0ff;color:var(--violet)}
     .secondary:hover{background:#e4e6fb}
+    .secondary:disabled{background:#edf0f8;color:#a4a9c0;cursor:not-allowed}
     .game-screen{flex-direction:column;gap:20px}
     .chapter{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--muted);font-size:13px;font-weight:900;letter-spacing:.08em}
     .chapter-tag{color:var(--violet);background:var(--violet-3);padding:8px 12px;border-radius:999px;letter-spacing:0}
@@ -106,6 +107,7 @@
     .code-card{background:var(--violet);color:#fff;border-radius:22px;padding:18px 28px;margin:16px 0;box-shadow:0 12px 25px rgba(109,99,217,.25)}
     .code-card small{display:block;opacity:.85;font-weight:800}
     .code{font-size:44px;font-weight:1000;letter-spacing:.22em;margin-left:.22em}
+    .code-caption{font-size:20px;font-weight:1000;margin-top:8px;letter-spacing:.08em}
     .summary{max-width:760px;text-align:left;background:#fff;border:1px solid #dde1f1;border-radius:18px;padding:18px 20px;margin:14px 0 22px;line-height:1.75}
     .summary strong{color:var(--violet)}
     .end-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -197,6 +199,7 @@
           <div class="hint" id="hint">閱讀完成後，按「下一幕」。</div>
           <div class="control-buttons">
             <button class="secondary" id="restartBtn">重新開始</button>
+            <button class="secondary" id="prevBtn">上一幕</button>
             <button class="primary" id="nextBtn">下一幕</button>
           </div>
         </div>
@@ -209,6 +212,7 @@
         <div class="code-card">
           <small>青春密碼</small>
           <div class="code">2499</div>
+          <div class="code-caption">愛是久久</div>
         </div>
         <div class="summary">
           <strong>你已完成的學習重點：</strong><br>
@@ -263,7 +267,7 @@
           "retry":"再確認一次：你最不想把感情變成哪一種樣子？"
         }
       },
-      {"title":"畢業禮物","chapter":"第五章｜你真正想要的關係","text":"真愛不是競技場，守住本心，不需花力氣去炫耀與比較談戀愛的進度。\n從從容容地感受愛，打造屬於自己的幸福。\n畢業禮物【青春密碼 2499】——愛是久久。","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾"}
+      {"title":"畢業禮物","chapter":"第五章｜你真正想要的關係","text":"真愛不是競技場，守住本心，不需花精力去炫耀和比較談戀愛的進度， 從從容容感受愛，打造屬於自己的幸福！ 魔法學院畢業禮物-「愛是久久」。","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾"}
     ];
     const totalQuiz = scenes.filter(s => !!s.quiz).length;
 
@@ -286,6 +290,7 @@
     const options = $("options");
     const feedback = $("feedback");
     const nextBtn = $("nextBtn");
+    const prevBtn = $("prevBtn");
     const hint = $("hint");
     const progressBar = $("progressBar");
     const progressText = $("progressText");
@@ -365,6 +370,7 @@
       }
 
       nextBtn.textContent = index === scenes.length - 1 ? "完成挑戰" : "下一幕";
+      prevBtn.disabled = index === 0;
       updateProgress();
       saveProgress();
       window.scrollTo({top:0,behavior:"smooth"});
@@ -428,6 +434,13 @@
       renderScene();
     }
 
+    function prevScene(){
+      if(index <= 0) return;
+      index--;
+      beep("ok");
+      renderScene();
+    }
+
     function nextScene(){
       if(nextBtn.disabled) return;
       if(index < scenes.length - 1){
@@ -466,6 +479,7 @@
 
     $("startBtn").addEventListener("click", ()=>startGame(false));
     $("nextBtn").addEventListener("click", nextScene);
+    $("prevBtn").addEventListener("click", prevScene);
     $("restartBtn").addEventListener("click", ()=>{
       if(confirm("確定要清除目前進度並重新開始嗎？")) startGame(true);
     });
@@ -479,6 +493,9 @@
     document.addEventListener("keydown", e=>{
       if(e.key === "Enter" && gameScreen.classList.contains("active") && !nextBtn.disabled){
         nextScene();
+      }
+      if(e.key === "ArrowLeft" && gameScreen.classList.contains("active") && index > 0){
+        prevScene();
       }
     });
 
