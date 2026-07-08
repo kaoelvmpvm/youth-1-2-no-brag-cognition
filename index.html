@@ -269,6 +269,65 @@
       },
       {"title":"畢業禮物","chapter":"第五章｜你真正想要的關係","text":"真愛不是競技場，守住本心，不需花精力去炫耀和比較談戀愛的進度， 從從容容感受愛，打造屬於自己的幸福！ 魔法學院畢業禮物-「愛是久久」。","thought":"himmel","thoughtLabel":"芙莉蓮想起：欣梅爾"}
     ];
+    // ===== 角色名稱去識別化替換 =====
+const NAME_REPLACE_MAP = [
+  ["芙莉蓮", "湖莉蓮"],
+  ["修塔爾克", "修塔洛克"],
+  ["海塔", "海達"],
+  ["費倫", "菲倫"],
+  ["艾冉", "艾嵐"],
+  ["欣梅爾", "星梅爾"]
+];
+
+function replaceCharacterNames(text){
+  if(typeof text !== "string") return text;
+  return NAME_REPLACE_MAP.reduce(
+    (result, [from, to]) => result.replaceAll(from, to),
+    text
+  );
+}
+
+function deepReplaceCharacterNames(value){
+  if(typeof value === "string"){
+    return replaceCharacterNames(value);
+  }
+
+  if(Array.isArray(value)){
+    return value.map(deepReplaceCharacterNames);
+  }
+
+  if(value && typeof value === "object"){
+    Object.keys(value).forEach(key => {
+      value[key] = deepReplaceCharacterNames(value[key]);
+    });
+  }
+
+  return value;
+}
+
+// 修改 scenes 內所有劇情、題目、回饋、thoughtLabel 的角色名稱
+scenes.forEach(deepReplaceCharacterNames);
+
+// 修改 HTML 畫面上已經寫死的角色名稱，例如 title、alt、品牌文字、角色名牌
+document.title = replaceCharacterNames(document.title);
+
+const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+let textNode;
+while(textNode = walker.nextNode()){
+  textNode.nodeValue = replaceCharacterNames(textNode.nodeValue);
+}
+
+document.querySelectorAll("[alt], [title], [aria-label]").forEach(el => {
+  if(el.hasAttribute("alt")){
+    el.setAttribute("alt", replaceCharacterNames(el.getAttribute("alt")));
+  }
+  if(el.hasAttribute("title")){
+    el.setAttribute("title", replaceCharacterNames(el.getAttribute("title")));
+  }
+  if(el.hasAttribute("aria-label")){
+    el.setAttribute("aria-label", replaceCharacterNames(el.getAttribute("aria-label")));
+  }
+});
     const totalQuiz = scenes.filter(s => !!s.quiz).length;
 
     let index = 0;
